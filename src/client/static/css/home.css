@@ -1,0 +1,374 @@
+@import "reset.css";
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-color: #9cbeff;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+main {
+  display: flex;
+  width: 900px;
+  height: 600px;
+  animation: fadein 1s;
+  border-radius: 10px;
+  box-shadow: 0px 0px 100px 10px #6fa0fc;
+}
+
+.leftside {
+  width: 50%;
+  height: 100%;
+  background-color: #3d82ff;
+  text-align: center;
+  color: white;
+  font-size: 25px;
+  border-radius: 10px 0px 0px 10px;
+  /* background-color: rgb(255, 255, 255, 0.5); */
+}
+
+@keyframes cloud {
+  0% {
+  }
+  25% {
+    transform: translateY(7px);
+  }
+  50% {
+    transform: translateY(0px) scale(100%);
+  }
+  75% {
+    transform: translateY(-7px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.cloud__img {
+  margin-top: 5%;
+  width: 60%;
+  animation: cloud 4s linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(350px);
+    opacity: 0;
+  }
+}
+
+.rains > span {
+  display: inline-block;
+  opacity: 0;
+}
+
+.rains > span:nth-child(1) {
+  animation: fall 3s 1s linear infinite;
+}
+
+.rains > span:nth-child(2) {
+  animation: fall 3s 1.7s linear infinite;
+}
+
+.rains > span:nth-child(3) {
+  animation: fall 3s 0.6s linear infinite;
+}
+
+.rains > span:nth-child(4) {
+  animation: fall 3s 2.6s linear infinite;
+}
+.rains > span:nth-child(5) {
+  animation: fall 3s 2s linear infinite;
+}
+.rains > span:nth-child(6) {
+  animation: fall 3s 1.4s linear infinite;
+}
+.rains > span:nth-child(7) {
+  animation: fall 3s 2.4s linear infinite;
+}
+.rains > span:nth-child(8) {
+  animation: fall 3s 1.2s linear infinite;
+}
+.rains > span:nth-child(9) {
+  animation: fall 3s 2s linear infinite;
+}
+.rains > span:nth-child(10) {
+  animation: fall 3s 0.2s linear infinite;
+}
+.rightside {
+  color: #333333;
+  font-weight: 700;
+  width: 50%;
+  height: 100%;
+  background-color: white;
+  border-radius: 0px 10px 10px 0px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 30px;
+  font-family: "Roboto Slab", serif;
+  margin-top: 80px;
+  margin-bottom: 80px;
+  color: #23303d;
+}
+
+.login__form {
+  padding: 0px 100px;
+  text-align: left;
+}
+
+.image {
+  margin: 40px 0px;
+  width: 150px;
+  height: 150px;
+}
+
+.login__form .id,
+.login__form .password {
+  padding-left: 0px;
+  margin-top: 30px;
+}
+
+.id__input,
+.password__input {
+  width: 97%;
+  height: 30px;
+  font-size: 18px;
+  border: none;
+  border-bottom: 1px solid #bdcfed;
+  padding: 0px 5px;
+  margin-top: 15px;
+}
+
+.info__input {
+  padding: 0px;
+  text-align: left;
+}
+
+.id,
+.password {
+  text-align: left;
+  color: grey;
+}
+
+.id__input:focus,
+.password__input:focus {
+  outline: none;
+  border-bottom: 2px solid #bdcfed;
+}
+
+.login__form .btns {
+  display: flex;
+  margin-top: 40px;
+  padding: 0px;
+  justify-content: center;
+}
+
+.btns .sign-up,
+.btns .login {
+  font-size: 12px;
+  background-color: #3d82ff;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100px;
+}
+
+.btns .login {
+  margin-left: 100px;
+  font-family: "Roboto Slab", serif;
+  font-weight: 500;
+}
+.btns .sign-up {
+  background-color: white;
+  color: #333333;
+  border: 2px solid #3d82ff;
+  font-family: "Roboto Slab", serif;
+  font-weight: 500;
+}
+
+.btns .sign-up:focus,
+.btns .login:focus {
+  outline: none;
+}
+
+/* 회원가입 */
+.hidden {
+  display: none;
+}
+
+.signup__modal {
+  background-color: white;
+  position: fixed;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  width: 400px;
+  height: 500px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 1px #999;
+  z-index: 3;
+  animation: fadein 1s;
+}
+
+.signup__form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Roboto Slab", serif;
+}
+
+.signup-title {
+  font-size: 25px;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  font-weight: 700;
+}
+
+.signup__input {
+  border: none;
+  border-bottom: 1px solid #9cbeff;
+  margin-bottom: 40px;
+  font-size: 16px;
+  width: 230px;
+  padding-bottom: 5px;
+  padding-left: 3px;
+}
+
+.signup__input:nth-child(6) {
+  margin-bottom: 0px;
+}
+
+.signup__input:focus {
+  outline: none;
+}
+
+.signup-btns {
+  margin-top: 30px;
+  margin-bottom: 0px;
+  border: none;
+}
+
+.signup-submit-btns,
+.signup-cancel-btns {
+  width: 90px;
+  height: 40px;
+  border: none;
+  margin: 10px 30px;
+  border-radius: 5px;
+  color: white;
+  background-color: #3d82ff;
+  font-weight: 500;
+  font-size: 15px;
+  font-family: "Roboto Slab", serif;
+}
+
+.signup-submit-btns:focus,
+.signup-cancel-btns:focus {
+  outline: none;
+}
+
+.submit-check__modal {
+  font-family: "Roboto Slab", serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  position: fixed;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  width: 330px;
+  height: 100px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 1px #999;
+  z-index: 3;
+  animation: fadein 0.5s;
+}
+
+.content {
+  margin-bottom: 20px;
+}
+
+.ok-btn {
+  font-family: "Roboto Slab", serif;
+  font-size: 12px;
+  background-color: #3d82ff;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  width: 50px;
+  height: 30px;
+}
+
+.hidden {
+  display: none;
+}
+
+.login-check-message {
+  position: absolute;
+  color: red;
+  margin-top: 20px;
+  font-weight: 500;
+}
+
+.greeting {
+  margin-top: 50px;
+  font-family: "Roboto Slab", serif;
+  font-size: 30px;
+  margin-bottom: 150px;
+}
+
+.btns {
+  display: flex;
+}
+
+.btn-logout,
+.btn-goToDashboard {
+  border: none;
+  font-size: 15px;
+  background-color: #3d82ff;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  width: 150px;
+  height: 50px;
+  margin: 0px 10px;
+  outline: none;
+}
+
+.btn-logout {
+  background-color: white;
+  color: #3d82ff;
+  border: 2px solid #3d82ff;
+}

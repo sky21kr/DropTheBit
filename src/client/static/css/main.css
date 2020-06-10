@@ -1,0 +1,324 @@
+@import "reset.css";
+@import url("https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+body {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes incoming {
+  from {
+    transform: translateX(-300px);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.menu {
+  background-color: #9cbeff;
+  height: 100%;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 1px 0 px 10px rgb(196, 196, 196);
+  font-weight: 500;
+  animation: incoming 0.5s;
+}
+
+.logo {
+  margin-top: 30px;
+  width: 300px;
+  margin-bottom: 50px;
+}
+
+.menu-myfile,
+.menu-sharefile {
+  background-color: white;
+  padding: 10px;
+  width: 150px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  box-shadow: 0px 2px 20px 1px #6fa0fc;
+  text-align: center;
+}
+
+.menu-volumne {
+  margin-top: 280px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0px 30px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header-column-left {
+  padding: 10px;
+  border: 2px solid rgb(204, 204, 204);
+  border-radius: 15px;
+  margin: 40px 0px;
+  font-size: 20px;
+}
+
+.fa-search {
+  color: grey;
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.input-search {
+  border: none;
+  width: 100px;
+  height: 25px;
+  font-family: "Noto Sans KR", sans-serif;
+  transition: all 1s;
+  margin-left: 10px;
+  width: 300px;
+}
+
+.input-search:focus {
+  outline: none;
+  width: 300px;
+}
+
+.input-search::placeholder {
+  font-size: 20px;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+.header-column-right {
+  display: flex;
+  align-items: center;
+}
+
+.logout {
+  margin-left: 40px;
+  border: none;
+  width: 80px;
+  height: 35px;
+  border-radius: 10px;
+  background-color: #9cbeff;
+  color: white;
+  font-weight: 800;
+  font-family: "Noto Sans KR", sans-serif;
+  box-shadow: 0px 2px 5px #cedfff;
+}
+
+.logout:focus {
+  outline: none;
+}
+
+.btns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  border: none;
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: transparent;
+  font-weight: 700;
+  font-size: 15px;
+  font-family: "Noto Sans KR", sans-serif;
+  box-shadow: 0px 0px 5px #cacaca;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.upload-btn {
+  margin-right: 20px;
+}
+
+.route {
+  margin: 20px 0px;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  width: 100%;
+  height: 500px;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0px 0px 5px #cacaca;
+  padding: 30px;
+}
+
+.table-columns {
+  display: flex;
+}
+
+.table-row-item {
+  display: flex;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.table-columns {
+  width: 100%;
+}
+
+.table-column-name,
+.table-row-name {
+  width: 40%;
+}
+
+.table-row-name {
+  padding-left: 10px;
+}
+
+.table-column-date,
+.table-row-date {
+  width: 20%;
+}
+
+.table-column-size,
+.table-row-size {
+  width: 20%;
+}
+
+.table-column-owner,
+.table-row-owner {
+  width: 20%;
+}
+
+.hr {
+  width: 100%;
+  size: "2";
+  border: solid 1px rgb(206, 206, 206);
+  margin: 10px 0px;
+}
+
+.upload-input {
+  display: none;
+}
+
+.load-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  background-color: white;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 30%;
+  width: 250px;
+  height: 150px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 1px #999;
+  z-index: 3;
+  animation: fadein 1s;
+}
+
+.load-modal-content {
+  margin-top: 50px;
+}
+
+.load-modal-btn {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 12px;
+  background-color: #3d82ff;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  width: 50px;
+  height: 30px;
+  margin-top: 30px;
+}
+
+.load-modal-btn:focus {
+  outline: none;
+}
+
+.add-folder-modal {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  background-color: white;
+  top: 30%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  width: 300px;
+  height: 200px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 1px #999;
+  animation: fadein 1s;
+  z-index: 10;
+  padding: 40px;
+}
+
+.add-folder-content {
+  margin-bottom: 20px;
+}
+
+.add-folder-input {
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #9cbeff;
+}
+
+.add-folder-input:focus {
+  outline: none;
+  border-bottom: 1.5px solid #3d82ff;
+}
+
+.add-folder-btns {
+  text-align: right;
+}
+
+.btn-add-folder,
+.btn-cancel {
+  font-size: 12px;
+  background-color: #3d82ff;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  width: 50px;
+  height: 30px;
+}
+
+.btn-cancel {
+  background-color: white;
+  color: black;
+  margin-right: 10px;
+  border: 1px solid #3d82ff;
+}
+
+.btn-add-folder:focus,
+.btn-cancel:focus {
+  outline: none;
+}
+
+.file-icon {
+  width: 15px;
+}
+
+.hidden {
+  display: none;
+}

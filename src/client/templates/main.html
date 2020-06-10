@@ -1,0 +1,124 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Drop the Bit</title>
+    <link rel="stylesheet" href="/static/css/main.css?" />
+    <script
+      src="https://kit.fontawesome.com/f6f0195624.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <!-- 폴더 추가 모달 창 -->
+    <div class="add-folder-modal hidden">
+      <div class="add-folder-content">
+        새 폴더
+      </div>
+      <input class="add-folder-input" type="text" placeholder="새 폴더" />
+      <div class="add-folder-btns">
+        <button class="btn-cancel">취소</button>
+        <button class="btn-add-folder">생성</button>
+      </div>
+    </div>
+    <!-- 확인 모달 창 -->
+    <div class="load-modal hidden">
+      <div class="load-modal-content">내용</div>
+      <button class="load-modal-btn">버튼</button>
+    </div>
+    <div class="menu">
+      <img class="logo" src="{% static 'images/logo.png' %}" />
+      <div class="menu-myfile">
+        내 파일
+      </div>
+      <div class="menu-sharefile">
+        공유 파일
+      </div>
+      <div class="menu-volumne">
+        저장 용량 5G / 30GB
+      </div>
+    </div>
+    <div class="main">
+      <div class="header">
+        <div class="header-column-left">
+          <div class="search">
+            <input class="input-search" placeholder="Search" />
+            <i class="fas fa-search"></i>
+          </div>
+        </div>
+        <div class="header-column-right">
+          <div class="greetings">{{user.get_username}} 님 안녕하세요</div>
+
+          <button class="logout">Log Out</button>
+        </div>
+      </div>
+      <div class="btns">
+        <div class="btns-column-left">
+          <form
+            class="load-form"
+            method="POST"
+            enctype="multipart/form-data"
+            novalidate
+          >
+            {% csrf_token %}
+            <input type="file" class="upload-input" />
+            <button class="btn upload-btn" type="button">업로드</button>
+            <button class="btn download-btn">다운로드</button>
+          </form>
+        </div>
+        <div class="btns-column-right">
+          <button class="btn newfolder-btn">새폴더</button>
+        </div>
+      </div>
+      <div class="route">
+        루트
+      </div>
+      <div class="table">
+        <div class="table-columns">
+          <div class="table-column-name">파일 이름</div>
+          <div class="table-column-date">수정한 날짜</div>
+          <div class="table-column-size">파일 크기</div>
+          <div class="table-column-owner">소유자</div>
+        </div>
+        <hr class="hr" />
+        <ul class="table-rows">
+          <li class="table-row-item">
+            <i class="far fa-file file-icon"></i>
+            <div class="table-row-name">
+              클라우드컴퓨팅.docs
+            </div>
+            <div class="table-row-date">
+              2020-06-03 오전 1:31
+            </div>
+            <div class="table-row-size">
+              3KB
+            </div>
+            <div class="table-row-owner">
+              신승민
+            </div>
+          </li>
+          <li class="table-row-item">
+            <i class="far fa-file file-icon"></i>
+            <div class="table-row-name">
+              운영체제.docs
+            </div>
+            <div class="table-row-date">
+              2020-06-03 오후 4:43
+            </div>
+            <div class="table-row-size">
+              6.3MB
+            </div>
+            <div class="table-row-owner">
+              신승민
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- <script> var a = "{{ token }}"</script> -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>

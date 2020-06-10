@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drop The Bit</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="static/css/home.css?aftera" />
+  </head>
+  <body>
+    <!-- 회원가입 모달 -->
+    <div class="signup__modal hidden">
+      <form class="signup__form">
+        <div class="signup-title">Create Your Account</div>
+        <input class="signup-input-id signup__input" placeholder="Id" />
+        <input
+          class="signup-input-nickname signup__input"
+          placeholder="Nickname"
+          autocomplete="new-password"
+        />
+        <input
+          class="signup-input-password signup__input"
+          placeholder="Password"
+          type="password"
+          autocomplete="new-password"
+        />
+        <input
+          class="signup-input-cpassword signup__input"
+          placeholder="Confirm Password"
+          type="password"
+        />
+        <input
+          class="signup-input-email signup__input"
+          placeholder="E-mail"
+          type="email"
+        />
+        <div class="signup-btns">
+          <button class="signup-submit-btns" type="button">Submit</button>
+          <button class="signup-cancel-btns" type="button">Cancel</button>
+        </div>
+      </form>
+    </div>
+    <div class="submit-check__modal hidden">
+      <div class="content">Sigin Up Success</div>
+      <button class="ok-btn">OK</button>
+    </div>
+    <main>
+      <div class="leftside">
+        <img class="cloud__img" src="{% static 'images/cloud.png' %}" />
+        <div class="rains">
+          <span>1</span>
+          <span>1</span>
+          <span>0</span>
+          <span>1</span>
+          <span>0</span>
+          <span>1</span>
+          <span>0</span>
+          <span>0</span>
+          <span>1</span>
+          <span>1</span>
+        </div>
+      </div>
+      <div class="rightside">
+        <div class="title">Welcome To Drop The Bit</div>
+        {%if user.is_authenticated %}
+        <div class="greeting">{{user.get_username}}</div>
+        <div class="btns">
+          <button class="btn-logout" type="button">
+            Logout
+          </button>
+          <button
+            class="btn-goToDashboard"
+            type="button"
+            href="{%url 'login'%}? next={{request.path}}"
+          >
+            Go Dashboard
+          </button>
+        </div>
+        {%else%}
+        <form class="login__form" method="POST" action="{% url 'login' %}">
+          {% csrf_token %}
+          <div class="login__form info__input">
+            <div class="login__form id">Id</div>
+            <input class="login__form id__input" type="text" name="id" />
+            <div class="login__form password">Password</div>
+            <input
+              class="login__form password__input"
+              type="password"
+              name="password"
+            />
+          </div>
+          <div class="login-check-message">
+            {{ data }}
+          </div>
+          <div class="login__form btns">
+            <button class="btns sign-up" type="button">SIGN UP</button>
+            <button class="btns login" type="submit">LOGIN</button>
+          </div>
+        </form>
+        {%endif%}
+      </div>
+    </main>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="{% static 'js/home.js' %}"></script>
+  </body>
+</html>
