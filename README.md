@@ -15,5 +15,5 @@ Amazon S3<br>
 ## Screenshot
 <div>
   <img src="https://user-images.githubusercontent.com/19388573/85133014-dce27300-b274-11ea-9b8f-ac442b4af3a2.png">
-  <img src="https://user-images.githubusercontent.com/19388573/85133609-f9cb7600-b275-11ea-8349-36c9b715925e.png">
+  <img src="https://user-images.githubusercontent.com/19388573/85133778-4b740080-b276-11ea-8820-f6162b0d38e9.png">
 </div>
