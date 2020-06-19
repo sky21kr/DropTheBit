@@ -17,21 +17,36 @@ from django.contrib import admin
 from django.conf.urls import url
 from django.urls import path
 from django.views.generic.base import TemplateView
-from files.views import upload_file, testing
-
+from files.views import upload, upload, download, file_sharing, file_sharing_del, rename_file, ListAPI, rename_folder, copy_file, share_list, create_folder, get_capacity, SearchAPI, delete_file, delete_folder
 import client.views
 
 urlpatterns = [
     url('admin/', admin.site.urls),
     path('', client.views.home, name='home'),
-
-    # path('api/auth', include('knox.urls')),
-    # path('api-auth/', include('rest_framework.urls')),
-
     path('account/login/', client.views.login, name='login'),
     path('account/logout', client.views.logout, name='logout'),
     path('account/signup/', client.views.signup, name='signup'),
 
-    path('upload_test', testing, name='testing'),
-    path('test', client.views.test, name='test'),
+    path('list/<int:folder_id>', ListAPI, name='list'),
+
+    path('copy/<int:file_id>', copy_file, name='copy_file'),
+
+    path('upload/<int:folder_id>', upload, name='upload'),
+    path('file/<int:file_id>/download', download, name='download'),
+    path('folderAdd', create_folder, name='create_folder'),
+
+    path('file/<int:file_id>/rename', rename_file, name='rename'),
+    path('folder/<int:folder_id>/rename', rename_folder, name='rename_folder'),
+
+    path('file/<int:file_id>/share', file_sharing, name='shared'),
+    path('file/<int:file_id>/share_del', file_sharing_del, name='shared_del'),
+    path('file/<int:file_id>', delete_file, name='delete_file'),
+
+    path('search/<str:target>', SearchAPI, name='search'),
+
+    path('capacity', get_capacity, name='get_capacity'),
+    path('shared', share_list, name='share_list'),
+
+    path('file/<int:file_id>', delete_file, name='delete_file'),
+    path('folder/<int:folder_id>', delete_folder, name='delete_folder'),
 ]

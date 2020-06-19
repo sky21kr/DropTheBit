@@ -12,7 +12,11 @@
     />
     <link rel="stylesheet" href="static/css/home.css?aftera" />
   </head>
-  <body>
+  <body
+    onselectstart="return false"
+    style="cursor: default;"
+    ondragstart="return false"
+  >
     <!-- 회원가입 모달 -->
     <div class="signup__modal hidden">
       <form class="signup__form">
@@ -67,7 +71,7 @@
       </div>
       <div class="rightside">
         <div class="title">Welcome To Drop The Bit</div>
-        {%if user.is_authenticated %}
+        {%if user.thenticated %}
         <div class="greeting">{{user.get_username}}</div>
         <div class="btns">
           <button class="btn-logout" type="button">

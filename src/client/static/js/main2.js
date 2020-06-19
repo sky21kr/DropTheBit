@@ -198,6 +198,7 @@ function addCheckedEvent(target) {
         }
       }
     }
+    console.log(targetName);
     if ($(target).hasClass("clicked") !== true) {
       $(".table-row-item").removeClass("clicked");
       $(target).addClass("clicked");
@@ -255,13 +256,6 @@ function addContextMenuEvent(target) {
 
     if (currentItemType === FOLDER) {
       $(".folder")
-        .css({
-          left: posLeft,
-          top: posTop,
-        })
-        .show();
-    } else if (currentType === SHAREDFILE) {
-      $(".share")
         .css({
           left: posLeft,
           top: posTop,
@@ -461,10 +455,10 @@ $(".logout").click(() => {
 // 파일 업로드 버튼 클릭시
 $(".upload-btn").click(() => {
   if (currentType == SHAREDFILE) {
-    onesideModalInfoChange("공유 폴더에는 업로드가 불가능합니다");
+    onesideModalInfoChange("공유 폴더는 폴더 추가가 불가능합니다");
     return;
   } else if (currentType == SEARCHFILE) {
-    onesideModalInfoChange("검색 결과창에는 업로드가 불가능합니다");
+    onesideModalInfoChange("검색 결과창은 폴더 추가가 불가능합니다");
     return;
   }
   $(".upload-input").click();
@@ -472,6 +466,13 @@ $(".upload-btn").click(() => {
 
 // 파일 업로드
 $(".upload-input").change((event) => {
+  if (currentType == SHAREDFILE) {
+    onesideModalInfoChange("공유 폴더는 폴더 추가가 불가능합니다");
+    return;
+  } else if (currentType == SEARCHFILE) {
+    onesideModalInfoChange("검색 결과창은 폴더 추가가 불가능합니다");
+    return;
+  }
   file = event.target.files[0];
   var formData = new FormData();
   formData.append("file", event.target.files[0]);
@@ -529,12 +530,7 @@ $(".newfolder-btn").click(() => {
     }
     $(".interactive-input").val("");
     const currentFolderKey = currentFolderId; // 현재 폴더 키 넣어주기
-    for (folder of currentFolderContents.folders) {
-      if (folder.name === folderName) {
-        onesideModalInfoChange("동일한 폴더가 존재합니다");
-        return;
-      }
-    }
+
     const folderData = {
       folderName: folderName,
       currentFolderKey: currentFolderKey,
@@ -561,16 +557,12 @@ $(".contextmenu-download").click(() => {
   $.ajax({
     url: `../../file/${currentItemId}/download`, // URL 다시 설정하기
     type: "POST",
-    success: (data) => {
+    success: () => {
       $(".download-bits").css("animation", "fadeout 1s forwards");
-      var a = document.createElement("a");
-      a.setAttribute("download", "test");
-      a.setAttribute("href", data);
-      $(a).get(0).click();
     },
-    error: (data) => {
+    error: () => {
       $(".download-bits").css("animation", "fadeout 1s forwards");
-      window.open(data);
+
       onesideModalInfoChange("다운로드 실패");
     },
   });
@@ -800,7 +792,6 @@ $(".contextmenu-copy").click(() => {
       onesideModalInfoChange("파일 복사 완료");
     },
     error: () => {
-      $(".upload-bits").css("animation", "fadeout 1s forwards");
       onesideModalInfoChange("파일 복사 실패");
     },
   });

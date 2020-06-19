@@ -5,31 +5,94 @@
   <head>
     <meta charset="utf-8" />
     <title>Drop the Bit</title>
-    <link rel="stylesheet" href="/static/css/main.css?" />
+    <link rel="stylesheet" href="/static/css/main.css?hello" />
     <script
       src="https://kit.fontawesome.com/f6f0195624.js"
       crossorigin="anonymous"
     ></script>
   </head>
-  <body>
-    <!-- 폴더 추가 모달 창 -->
-    <div class="add-folder-modal hidden">
-      <div class="add-folder-content">
+  <body
+    onselectstart="return false"
+    style="cursor: default;"
+    ondragstart="return false"
+  >
+    <!-- 공유 드롭다운 메뉴 -->
+    <ul class="contextmenu share">
+      <li class="contextmenu-download"><a>다운로드</a></li>
+      <li class="contextmenu-namechange"><a>이름변경</a></li>
+    </ul>
+    <!-- 파일 드롭다운 메뉴 -->
+    <ul class="contextmenu file">
+      <li class="contextmenu-download"><a>다운로드</a></li>
+      <li class="contextmenu-copy"><a>복사</a></li>
+      <li class="contextmenu-share"><a>공유</a></li>
+      <li class="contextmenu-sharedel"><a>공유취소</a></li>
+      <li class="contextmenu-namechange"><a>이름변경</a></li>
+      <li class="contextmenu-delete"><a>삭제</a></li>
+    </ul>
+    <!-- 폴더 드롭다운 메뉴-->
+    <ul class="contextmenu folder">
+      <li class="contextmenu-namechange"><a>이름변경</a></li>
+      <li class="contextmenu-delete"><a>삭제</a></li>
+    </ul>
+    <!-- Interactive 모달 창 -->
+    <div class="interactive-modal hidden">
+      <div class="interactive-content">
         새 폴더
       </div>
-      <input class="add-folder-input" type="text" placeholder="새 폴더" />
-      <div class="add-folder-btns">
+      <input class="interactive-input" type="text" placeholder="새 폴더" />
+      <div class="interactive-btns">
         <button class="btn-cancel">취소</button>
-        <button class="btn-add-folder">생성</button>
+        <button class="btn-ok">확인</button>
       </div>
     </div>
-    <!-- 확인 모달 창 -->
-    <div class="load-modal hidden">
-      <div class="load-modal-content">내용</div>
-      <button class="load-modal-btn">버튼</button>
+    <!-- OneSide 모달 창 -->
+    <div class="oneside-modal hidden">
+      <div class="oneside-modal-content">내용</div>
+      <button class="oneside-modal-btn">버튼</button>
+    </div>
+    <!-- 파일 공유 모달 창 -->
+    <div class="file-share-modal hidden">
+      <div class="file-share-content">
+        파일 공유
+      </div>
+      <input
+        class="file-share-input"
+        type="text"
+        placeholder="공유할 사람 ID"
+      />
+      <div class="file-share-radio">
+        <input type="radio" name="file-share-mode" value="0" checked />읽기
+        <input type="radio" name="file-share-mode" value="1" />읽기/쓰기
+      </div>
+      <div class="file-share-btns">
+        <button class="btn-share-cancel">취소</button>
+        <button class="btn-share-ok">확인</button>
+      </div>
     </div>
     <div class="menu">
-      <img class="logo" src="{% static 'images/logo.png' %}" />
+      <div class="title">Drop The Bit</div>
+      <img class="logo" src="{% static 'images/cloud.png' %}" />
+      <div class="load-status">
+        <div class="download-bits">
+          <span class="download-bit">1</span>
+          <span class="download-bit">0</span>
+          <span class="download-bit">0</span>
+          <span class="download-bit">1</span>
+          <span class="download-bit">0</span>
+          <span class="download-bit">1</span>
+          <span class="download-bit">0</span>
+        </div>
+        <div class="upload-bits">
+          <span class="upload-bit">1</span>
+          <span class="upload-bit">0</span>
+          <span class="upload-bit">0</span>
+          <span class="upload-bit">1</span>
+          <span class="upload-bit">0</span>
+          <span class="upload-bit">1</span>
+          <span class="upload-bit">0</span>
+        </div>
+      </div>
       <div class="menu-myfile">
         내 파일
       </div>
@@ -37,7 +100,7 @@
         공유 파일
       </div>
       <div class="menu-volumne">
-        저장 용량 5G / 30GB
+        0.00G / 30.00GB
       </div>
     </div>
     <div class="main">
@@ -50,30 +113,30 @@
         </div>
         <div class="header-column-right">
           <div class="greetings">{{user.get_username}} 님 안녕하세요</div>
-
           <button class="logout">Log Out</button>
         </div>
       </div>
-      <div class="btns">
-        <div class="btns-column-left">
-          <form
-            class="load-form"
-            method="POST"
-            enctype="multipart/form-data"
-            novalidate
-          >
-            {% csrf_token %}
-            <input type="file" class="upload-input" />
-            <button class="btn upload-btn" type="button">업로드</button>
-            <button class="btn download-btn">다운로드</button>
-          </form>
+      <div class="middle">
+        <div class="route">
+          루트
         </div>
-        <div class="btns-column-right">
-          <button class="btn newfolder-btn">새폴더</button>
+        <div class="btns">
+          <div class="btns-column-left">
+            <form
+              class="load-form"
+              method="POST"
+              enctype="multipart/form-data"
+              novalidate
+            >
+              {% csrf_token %}
+              <input type="file" class="upload-input" />
+              <button class="btn upload-btn" type="button">업로드</button>
+            </form>
+          </div>
+          <div class="btns-column-right">
+            <button class="btn newfolder-btn">새폴더</button>
+          </div>
         </div>
-      </div>
-      <div class="route">
-        루트
       </div>
       <div class="table">
         <div class="table-columns">
@@ -84,7 +147,7 @@
         </div>
         <hr class="hr" />
         <ul class="table-rows">
-          <li class="table-row-item">
+          <!-- <li class="table-row-item">
             <i class="far fa-file file-icon"></i>
             <div class="table-row-name">
               클라우드컴퓨팅.docs
@@ -98,26 +161,13 @@
             <div class="table-row-owner">
               신승민
             </div>
-          </li>
-          <li class="table-row-item">
-            <i class="far fa-file file-icon"></i>
-            <div class="table-row-name">
-              운영체제.docs
-            </div>
-            <div class="table-row-date">
-              2020-06-03 오후 4:43
-            </div>
-            <div class="table-row-size">
-              6.3MB
-            </div>
-            <div class="table-row-owner">
-              신승민
-            </div>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>
-    <!-- <script> var a = "{{ token }}"</script> -->
+    <script>
+      var rootFolderId = Number("{{ rootFolderId }}");
+    </script>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="{% static 'js/main.js' %}"></script>
   </body>

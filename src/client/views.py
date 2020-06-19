@@ -21,22 +21,12 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.http import JsonResponse
+# import for makeing root folder when creating user
+from files.models import TestFile, Folder
 
 
 def home(request):
     return render(request, 'home.html')
-
-# # 경우의 따른 data값 반납 필요
-# @csrf_exempt
-# def login(request):
-#     id = request.POST.get('id', None)
-#     password = request.POST.get('password', None)
-#     print(id, password)
-#     # 로그인 실패
-#     # return render(request, 'home.html', {'data': "There is no matching user information"})
-#     # 로그인 성공
-
-#     return render(request, 'main.html', {"token": 1234})
 
 
 @csrf_exempt
@@ -47,30 +37,33 @@ def login(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             auth_login(request, user)
-            return render(request, 'main.html')
+            root_folder_id = user.root.all()[0].id
+            return render(request, 'main.html', {'rootFolderId': root_folder_id})
         else:
             return redirect('/')
     else:
-        return render(request, 'main.html')
-
-
-# @csrf_exempt
-# def signup(request):
-#     user = request.POST.get('user', None)
-#     print(user)
-#     return HttpResponse("123")
+        if request.user.is_active:
+            root_folder_id = request.user.root.all()[0].id
+            return render(request, 'main.html', {'rootFolderId': root_folder_id})
+        else:
+            return redirect('/')
 
 
 @csrf_exempt
 def signup(request):
     if request.method == "POST":
         if request.POST["password1"] == request.POST["password2"]:
-            User.objects.create_user(
+            user = User.objects.create_user(
                 username=request.POST["id"],
                 password=request.POST["password1"],
                 email=request.POST["email"],
                 last_name=request.POST["nickname"]
             )
+            root = Folder()
+            root.name = ''
+            root.owner = user
+            root.rootof = user
+            root.save()
             return JsonResponse(data={}, status=status.HTTP_201_CREATED)
         return JsonResponse(data={}, status=status.HTTP_400_BAD_REQUEST)
     return JsonResponse(data={}, status=status.HTTP_400_BAD_REQUEST)
@@ -82,9 +75,9 @@ def logout(request):
     return redirect('/')
 
 
+# 프론트 더미 데이터 테스트용
 @csrf_exempt
 def test(request):
-    print(request.POST["folderName"])
-    context = request.POST
-    print(context)
+    context = {'folders': [{'id': '2', 'name': '테스트폴더', 'owner': '테스트폴더주인', 'date': '테스트폴더날짜'}, {'id': '4', 'name': '테스트폴더2', 'owner': '테스트폴더주인2', 'date': '테스트폴더2날짜'}], 'files': [
+        {'id': '파일ID1', 'filename': '테스트파일1', 'size': '12MB', 'owner': '테스트파일1주인'}, {'id': '파일ID2', 'filename': '테스트파일2', 'size': '10MB', 'owner': '테스트파일2주인'}]}
     return HttpResponse(json.dumps(context), content_type="application/json")
